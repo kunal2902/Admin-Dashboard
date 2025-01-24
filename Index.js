@@ -21,7 +21,9 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+origin: '*'
+}));
 
 //Routes
 app.use("/Client", Client);
@@ -29,10 +31,15 @@ app.use("/General", General);
 app.use("/Management", Management);
 app.use("/Sales", Sales);
 
+
+
 const port = process.env.PORT || 3000;
 mongoose
   .connect(process.env.MONGO_URL)
   .then(
+
+   
+
     app.listen(port, () => {
       console.log(`Server Port :${port}`);
       // userModel.insertMany(dataUser);
